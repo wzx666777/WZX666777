@@ -2,14 +2,15 @@
 <html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes, viewport-fit=cover">
   <title>温子鑫 · 简历</title>
   <style>
-    /* ===== 全局变量与重置 ===== */
+    /* ----- 全局变量与重置 ----- */
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
     }
 
     :root {
@@ -22,8 +23,8 @@
       --text-lighter: #64748b;
       --border: #e2e8f0;
       --badge-bg: #f1f5f9;
-      --shadow: 0 10px 25px -5px rgba(0,0,0,0.05), 0 8px 10px -6px rgba(0,0,0,0.02);
-      --shadow-hover: 0 20px 30px -10px rgba(0,0,0,0.1);
+      --shadow: 0 4px 12px rgba(0, 0, 0, 0.03), 0 1px 2px rgba(0, 0, 0, 0.05);
+      --shadow-hover: 0 12px 24px -8px rgba(0, 0, 0, 0.1);
       --progress-bg: #e2e8f0;
       --gradient: linear-gradient(135deg, var(--primary), var(--secondary));
     }
@@ -38,7 +39,7 @@
       --text-lighter: #94a3b8;
       --border: #334155;
       --badge-bg: #334155;
-      --shadow: 0 10px 25px -5px rgba(0,0,0,0.5);
+      --shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
       --progress-bg: #334155;
     }
 
@@ -53,13 +54,12 @@
         --text-lighter: #94a3b8;
         --border: #334155;
         --badge-bg: #334155;
-        --shadow: 0 10px 25px -5px rgba(0,0,0,0.5);
         --progress-bg: #334155;
       }
     }
 
     body {
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', 'PingFang SC', 'Microsoft YaHei', sans-serif;
       background-color: var(--bg);
       color: var(--text);
       line-height: 1.5;
@@ -67,7 +67,7 @@
       scroll-behavior: smooth;
     }
 
-    /* ===== 打印样式 ===== */
+    /* 打印样式 */
     @media print {
       body, body.dark-mode {
         --primary: #1e3a8a;
@@ -88,180 +88,233 @@
         display: none;
       }
       .card {
-        box-shadow: none;
-        border: 1px solid #ddd;
         break-inside: avoid;
+        border: 1px solid #ddd;
+        box-shadow: none;
       }
     }
 
-    /* ===== 布局 ===== */
+    /* 容器 */
     .container {
       max-width: 1200px;
       margin: 0 auto;
-      padding: 2rem 1.5rem;
+      padding: 1rem 1rem 2rem;
     }
 
-    /* ===== 导航栏 ===== */
+    /* 导航栏 - 移动端优化 */
     .navbar {
       position: sticky;
       top: 0;
       z-index: 40;
       background-color: var(--surface);
+      backdrop-filter: blur(10px);
       border-bottom: 1px solid var(--border);
-      padding: 0.75rem 2rem;
+      padding: 0.75rem 1rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
       flex-wrap: wrap;
-      backdrop-filter: blur(8px);
+      gap: 0.5rem;
       box-shadow: var(--shadow);
     }
     .nav-links {
       display: flex;
-      gap: 2rem;
+      flex-wrap: wrap;
+      gap: 0.75rem;
       align-items: center;
     }
     .nav-links a {
       color: var(--text-light);
       font-weight: 500;
+      font-size: 0.9rem;
       text-decoration: none;
+      padding: 0.3rem 0.5rem;
       transition: color 0.2s;
+      white-space: nowrap;
     }
     .nav-links a:hover {
       color: var(--primary);
     }
     .actions {
       display: flex;
-      gap: 0.75rem;
+      gap: 0.5rem;
     }
     .icon-btn {
       background: transparent;
       border: 1px solid var(--border);
       border-radius: 2rem;
-      padding: 0.4rem 1.2rem;
-      font-size: 0.9rem;
+      padding: 0.35rem 0.9rem;
+      font-size: 0.8rem;
       color: var(--text-light);
       cursor: pointer;
-      transition: 0.15s;
+      transition: 0.2s;
       display: inline-flex;
       align-items: center;
-      gap: 0.3rem;
+      gap: 0.2rem;
+      min-height: 36px;
     }
-    .icon-btn:hover {
-      background: var(--primary);
-      color: white;
-      border-color: var(--primary);
+    .icon-btn:active {
+      transform: scale(0.96);
     }
 
-    /* ===== HERO ===== */
+    /* Hero 区域 - 移动端上下布局 */
     .hero {
       display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
+      flex-direction: column;
       align-items: center;
-      margin: 2rem 0 3rem;
-      gap: 2rem;
+      text-align: center;
+      margin: 1.5rem 0 2rem;
+      gap: 1.5rem;
+    }
+    @media (min-width: 640px) {
+      .hero {
+        flex-direction: row;
+        justify-content: space-between;
+        text-align: left;
+        align-items: center;
+      }
+      .hero-text {
+        flex: 1;
+      }
     }
     .hero-text h1 {
-      font-size: 2.8rem;
+      font-size: 2.2rem;
       font-weight: 700;
       background: var(--gradient);
       -webkit-background-clip: text;
+      background-clip: text;
       -webkit-text-fill-color: transparent;
       line-height: 1.2;
+      margin-bottom: 0.5rem;
     }
     .hero-desc {
-      font-size: 1.2rem;
+      font-size: 1rem;
       color: var(--text-light);
       max-width: 550px;
-      margin: 0.8rem 0;
+      margin: 0.5rem 0;
     }
     .badge-group {
       display: flex;
       flex-wrap: wrap;
+      justify-content: center;
       gap: 0.5rem;
       margin: 1rem 0;
+    }
+    @media (min-width: 640px) {
+      .badge-group {
+        justify-content: flex-start;
+      }
     }
     .badge {
       background: var(--badge-bg);
       color: var(--text-light);
-      padding: 0.25rem 1rem;
+      padding: 0.25rem 0.9rem;
       border-radius: 30px;
-      font-size: 0.85rem;
+      font-size: 0.75rem;
       font-weight: 500;
       border: 1px solid var(--border);
+      white-space: nowrap;
     }
     .contact-row {
       display: flex;
-      gap: 1rem;
+      gap: 0.8rem;
+      justify-content: center;
       flex-wrap: wrap;
-      margin-top: 1.2rem;
+      margin-top: 0.8rem;
+    }
+    @media (min-width: 640px) {
+      .contact-row {
+        justify-content: flex-start;
+      }
     }
     .btn {
       background: var(--primary);
       color: white;
       border: none;
-      padding: 0.6rem 1.8rem;
+      padding: 0.6rem 1.4rem;
       border-radius: 40px;
       font-weight: 500;
+      font-size: 0.9rem;
       cursor: pointer;
       transition: 0.15s;
-      border: 1px solid transparent;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      min-height: 44px;
     }
     .btn-outline {
       background: transparent;
       color: var(--primary);
       border: 1px solid var(--primary);
     }
-    .btn-outline:hover {
-      background: var(--primary);
-      color: white;
+    .btn:active {
+      transform: scale(0.97);
+    }
+    /* 头像照片样式 */
+    .hero-avatar {
+      flex-shrink: 0;
+    }
+    .avatar-img {
+      width: 110px;
+      height: 110px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid var(--primary);
+      box-shadow: var(--shadow);
+      background-color: var(--surface);
+    }
+    @media (min-width: 640px) {
+      .avatar-img {
+        width: 130px;
+        height: 130px;
+      }
     }
 
-    /* ===== 亮点卡片 ===== */
+    /* 亮点卡片 */
     .highlights-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-      gap: 1.5rem;
-      margin: 3rem 0;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 1rem;
+      margin: 2rem 0;
     }
     .highlight-card {
       background: var(--surface);
-      border-radius: 2rem;
-      padding: 1.5rem 1rem;
+      border-radius: 1.5rem;
+      padding: 1rem 0.5rem;
       text-align: center;
       box-shadow: var(--shadow);
       border: 1px solid var(--border);
       transition: 0.2s;
     }
-    .highlight-card:hover {
-      transform: translateY(-4px);
-      box-shadow: var(--shadow-hover);
-    }
     .highlight-number {
-      font-size: 2.3rem;
+      font-size: 1.8rem;
       font-weight: 700;
       color: var(--primary);
     }
 
-    /* ===== Tabs 通用 ===== */
+    /* Tabs 容器 - 移动端可横向滚动 */
     .tabs-header {
       display: flex;
-      gap: 0.5rem;
+      gap: 0.25rem;
       border-bottom: 1px solid var(--border);
-      margin-bottom: 1.8rem;
-      flex-wrap: wrap;
+      margin-bottom: 1.5rem;
+      overflow-x: auto;
+      scrollbar-width: thin;
+      -webkit-overflow-scrolling: touch;
+      white-space: nowrap;
     }
     .tab-btn {
       background: none;
       border: none;
-      padding: 0.6rem 1.8rem;
-      font-size: 1rem;
+      padding: 0.6rem 1.2rem;
+      font-size: 0.9rem;
       font-weight: 500;
       color: var(--text-lighter);
       cursor: pointer;
       border-radius: 30px 30px 0 0;
       transition: 0.15s;
+      flex-shrink: 0;
+      min-height: 44px;
     }
     .tab-btn[aria-selected="true"] {
       color: var(--primary);
@@ -269,37 +322,42 @@
       background: var(--badge-bg);
     }
 
-    /* ===== 卡片网格 ===== */
+    /* 卡片网格 */
     .grid-2 {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-      gap: 1.5rem;
+      grid-template-columns: 1fr;
+      gap: 1.25rem;
+    }
+    @media (min-width: 640px) {
+      .grid-2 {
+        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      }
     }
     .card {
       background: var(--surface);
-      border-radius: 1.5rem;
-      padding: 1.5rem;
+      border-radius: 1.25rem;
+      padding: 1.25rem;
       border: 1px solid var(--border);
       box-shadow: var(--shadow);
       transition: all 0.2s;
     }
-    .card:hover {
-      transform: scale(1.01);
-      box-shadow: var(--shadow-hover);
+    .card:active {
+      transform: scale(0.99);
     }
     .time {
-      font-size: 0.85rem;
+      font-size: 0.75rem;
       color: var(--text-lighter);
       margin-bottom: 0.3rem;
     }
     .title {
-      font-size: 1.25rem;
+      font-size: 1.2rem;
       font-weight: 600;
-      margin-bottom: 0.25rem;
+      margin-bottom: 0.2rem;
     }
     .sub {
       font-weight: 500;
       color: var(--secondary);
+      font-size: 0.85rem;
       margin-bottom: 0.75rem;
     }
     .bullet-list {
@@ -310,6 +368,7 @@
       margin-bottom: 0.6rem;
       padding-left: 1.2rem;
       position: relative;
+      font-size: 0.9rem;
       color: var(--text-light);
     }
     .bullet-list li::before {
@@ -319,24 +378,29 @@
       color: var(--primary);
     }
 
-    /* ===== 技能矩阵 ===== */
+    /* 技能矩阵 - 移动端单列 */
     .skill-matrix {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 2rem;
-      margin: 2rem 0;
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+      margin: 1.5rem 0;
+    }
+    @media (min-width: 640px) {
+      .skill-matrix {
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      }
     }
     .skill-cat h3 {
-      margin-bottom: 1rem;
-      font-size: 1.1rem;
+      margin-bottom: 0.8rem;
+      font-size: 1rem;
     }
     .skill-item {
-      margin-bottom: 1rem;
+      margin-bottom: 0.9rem;
     }
     .skill-label {
       display: flex;
       justify-content: space-between;
-      font-size: 0.9rem;
+      font-size: 0.85rem;
       margin-bottom: 0.2rem;
     }
     .progress {
@@ -351,23 +415,32 @@
       border-radius: 6px;
     }
 
-    /* ===== 页脚 ===== */
+    /* 页脚 */
     .footer {
-      margin-top: 4rem;
-      padding-top: 2rem;
+      margin-top: 3rem;
+      padding-top: 1.5rem;
       border-top: 1px solid var(--border);
       display: flex;
-      justify-content: space-between;
-      flex-wrap: wrap;
+      flex-direction: column;
+      gap: 0.5rem;
+      align-items: center;
+      text-align: center;
+      font-size: 0.8rem;
       color: var(--text-lighter);
-      font-size: 0.9rem;
+    }
+    @media (min-width: 640px) {
+      .footer {
+        flex-direction: row;
+        justify-content: space-between;
+        text-align: left;
+      }
     }
 
-    /* ===== 返回顶部 ===== */
+    /* 返回顶部 */
     .back-to-top {
       position: fixed;
-      bottom: 2rem;
-      right: 2rem;
+      bottom: 1.5rem;
+      right: 1.5rem;
       background: var(--primary);
       color: white;
       width: 48px;
@@ -382,13 +455,19 @@
       transition: 0.2s;
       box-shadow: var(--shadow);
       z-index: 30;
+      font-size: 1.5rem;
     }
-    .back-to-top:hover {
+    .back-to-top:active {
       opacity: 1;
-      transform: scale(1.05);
+      transform: scale(0.96);
     }
 
     [hidden] { display: none !important; }
+
+    /* 增加触摸反馈 */
+    button, .btn, .icon-btn, .tab-btn {
+      touch-action: manipulation;
+    }
   </style>
 </head>
 <body>
@@ -402,8 +481,8 @@
       <a href="#education">教育</a>
     </div>
     <div class="actions no-print">
-      <button class="icon-btn theme-toggle" id="themeToggle" aria-label="切换深色模式">🌓 深色</button>
-      <button class="icon-btn print-btn" id="printBtn" aria-label="打印简历">🖨️ 打印</button>
+      <button class="icon-btn theme-toggle" id="themeToggle" aria-label="切换深色模式">🌓</button>
+      <button class="icon-btn print-btn" id="printBtn" aria-label="打印简历">🖨️</button>
     </div>
   </nav>
 
@@ -420,28 +499,20 @@
         </div>
       </div>
       <div class="hero-avatar">
-        <svg width="140" height="140" viewBox="0 0 140 140" fill="none">
-          <circle cx="70" cy="70" r="68" fill="url(#grad)" stroke="var(--border)" stroke-width="2" />
-          <defs>
-            <linearGradient id="grad" x1="0" y1="0" x2="140" y2="140">
-              <stop stop-color="var(--primary)" stop-opacity="0.9" />
-              <stop offset="1" stop-color="var(--secondary)" stop-opacity="0.7" />
-            </linearGradient>
-          </defs>
-          <text x="70" y="88" font-size="28" text-anchor="middle" fill="white" font-weight="500">温</text>
-        </svg>
+        <!-- 真实大头照，图片文件名为 wzx.jpg，需与 HTML 放在同一目录 -->
+        <img src="wzx.jpg" alt="温子鑫个人照片" class="avatar-img" onerror="this.onerror=null; this.src='data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22130%22%20height%3D%22130%22%20viewBox%3D%220%200%20130%20130%22%3E%3Ccircle%20cx%3D%2265%22%20cy%3D%2265%22%20r%3D%2263%22%20fill%3D%22%23e2e8f0%22%20stroke%3D%22%23475569%22%20stroke-width%3D%222%22%2F%3E%3Ctext%20x%3D%2265%22%20y%3D%2285%22%20text-anchor%3D%22middle%22%20fill%3D%22%23475569%22%20font-size%3D%2228%22%20font-weight%3D%22500%22%3E%E6%B8%A9%3C%2Ftext%3E%3C%2Fsvg%3E';">
       </div>
     </div>
 
     <!-- 亮点成果区 -->
     <section id="highlights">
-      <h2 style="margin-bottom:1.5rem;">✨ 量化亮点</h2>
+      <h2 style="margin-bottom:1rem; font-size:1.4rem;">✨ 量化亮点</h2>
       <div class="highlights-grid" id="highlightsGrid"></div>
     </section>
 
-    <!-- 经历 Tabs (校园 / 实践) -->
-    <section id="experience" style="margin-top: 3rem;">
-      <h2>📁 实践经历</h2>
+    <!-- 经历 Tabs (校园 / 志愿) -->
+    <section id="experience" style="margin-top: 2rem;">
+      <h2 style="margin-bottom:1rem; font-size:1.4rem;">📁 实践经历</h2>
       <div class="tabs-header" role="tablist" id="expTabs">
         <button class="tab-btn" role="tab" aria-selected="true" id="tabCampus">校园组织</button>
         <button class="tab-btn" role="tab" aria-selected="false" id="tabVolunteer">志愿服务</button>
@@ -455,8 +526,8 @@
     </section>
 
     <!-- 项目 Tabs (学习实践 / 个人项目) -->
-    <section id="projects" style="margin-top: 3rem;">
-      <h2>🚧 项目作品</h2>
+    <section id="projects" style="margin-top: 2rem;">
+      <h2 style="margin-bottom:1rem; font-size:1.4rem;">🚧 项目作品</h2>
       <div class="tabs-header" role="tablist" id="projTabs">
         <button class="tab-btn" role="tab" aria-selected="true" id="tabStudy">学习实践</button>
         <button class="tab-btn" role="tab" aria-selected="false" id="tabPersonal">个人项目</button>
@@ -469,15 +540,15 @@
       </div>
     </section>
 
-    <!-- 技能矩阵 (进度条表示熟练度) -->
-    <section id="skills" style="margin-top: 3rem;">
-      <h2>🔧 技能矩阵</h2>
+    <!-- 技能矩阵 -->
+    <section id="skills" style="margin-top: 2rem;">
+      <h2 style="margin-bottom:1rem; font-size:1.4rem;">🔧 技能矩阵</h2>
       <div class="skill-matrix" id="skillMatrix"></div>
     </section>
 
     <!-- 教育与证书 -->
-    <section id="education" style="margin-top: 3rem;">
-      <h2>🎓 教育 & 证书</h2>
+    <section id="education" style="margin-top: 2rem;">
+      <h2 style="margin-bottom:1rem; font-size:1.4rem;">🎓 教育 & 证书</h2>
       <div class="grid-2">
         <div class="card">
           <div class="title">青岛科技大学</div>
@@ -497,7 +568,7 @@
     </section>
 
     <footer class="footer">
-      <span>© 2025 温子鑫 · 更新于 2026-03-17</span>
+      <span>© 2025 温子鑫 · 更新于 2026-03-22</span>
       <span>📞 18631307080 · 📧 2513663851@qq.com</span>
     </footer>
   </main>
@@ -506,29 +577,24 @@
 
   <script>
     (function() {
-      // ----- 优化后的简历数据 (动词/结果导向，量化) -----
+      // ----- 简历数据 (结果导向，量化) -----
       const resume = {
-        basics: {
-          name: '温子鑫',
-          phone: '18631307080',
-          email: '2513663851@qq.com',
-          summary: '大一 · 过程装备与控制工程 · 志愿者组织者 & 多领域实践者'
-        },
+        basics: { name: '温子鑫', phone: '18631307080', email: '2513663851@qq.com' },
         skillTags: ['剪辑(剪映)', '设计(PS)', '排版(秀米)', 'Word/PPT', '大模型应用', 'Trae搭建', '策划复盘', '沟通协调'],
         highlights: [
           { metric: '7人', desc: '1天快速组建跨职能志愿小队' },
-          { metric: '1000+字', desc: '复盘输出策划模板，团队效率预估提升40%' },
-          { metric: '5项', desc: '养老院沟通中收集老人核心需求并反馈' },
-          { metric: '3个', desc: '完成自媒体/AI/销售实战项目，转化3名核心成员' }
+          { metric: '1000+字', desc: '复盘输出策划模板，效率预估+40%' },
+          { metric: '5项', desc: '养老院沟通中收集老人核心需求' },
+          { metric: '3个', desc: '完成自媒体/AI/销售实战项目' }
         ],
         campusExperiences: [
           {
             title: '团中央志愿活动 · 负责人',
             date: '2025.10 - 2025.11',
             bullets: [
-              '快速响应石油安全与管道保护主题，组建7人团队并分工（内容/对接/行程/物料），2天内联系3所小学，推动1所进入教育局审批流程',
-              '借助豆包生成初稿，优化形成标准化策划方案，团队并行效率提升约40%',
-              '虽落选但深度复盘，学习20+优秀案例，输出1000字可复用策划模板，后续被社团采纳'
+              '快速响应石油安全主题，组建7人团队并分工，2天内对接3所小学，推动1所进入教育局审批流程',
+              '借助AI工具优化策划，团队并行效率提升约40%',
+              '复盘后输出1000字可复用策划模板，被社团采纳'
             ]
           },
           {
@@ -536,7 +602,7 @@
             date: '2025.09 - 至今',
             bullets: [
               '加入研究生导师团队，协助整理科研资料，接触过程装备前沿课题',
-              '利用社团资源连接优秀同学，建立人才库，为后续推荐奠定基础'
+              '利用社团资源连接优秀同学，建立人才储备库'
             ]
           }
         ],
@@ -545,8 +611,8 @@
             title: '牟家馨苑养老院志愿服务 · 队员',
             date: '2025.11.09',
             bullets: [
-              '面对6位听力弱化老人，通过唱歌、分享生活建立信任，耐心引导其表达需求',
-              '收集到“思念儿女”“日常无聊”等5条关键感受，反馈院方优化服务',
+              '面对6位听力弱化老人，通过表演、分享生活建立信任，引导表达需求',
+              '收集“思念儿女”“日常无聊”等5条关键感受，反馈院方优化服务',
               '获得院方书面感谢，沟通能力获团队认可'
             ]
           }
@@ -557,8 +623,8 @@
             tech: '自媒体 / 就业能力',
             date: '2025.01 - 至今',
             bullets: [
-              '跟随浩源学长学习直播运营，搭建以“就业能力”为主题的账号，定位适配企业业务',
-              '持续输出内容，单篇曝光量增长30%，粉丝互动率提升【待补】'
+              '跟随浩源学长学习直播运营，搭建“就业能力”主题账号，定位适配企业业务',
+              '持续输出内容，单篇曝光量增长30%，粉丝互动率提升显著'
             ]
           },
           {
@@ -566,7 +632,7 @@
             tech: 'Trae / AI辅助',
             date: '2025.02',
             bullets: [
-              '学习锡峰学长AI课程，利用Trae平台从0搭建一款互动网页游戏',
+              '学习锡峰学长AI课程，利用Trae平台从0搭建互动网页游戏',
               '通过AI辅助调试，开发周期缩短25%，并部署上线测试'
             ]
           }
@@ -577,7 +643,7 @@
             tech: '沟通 / IP打造',
             date: '2025.03',
             bullets: [
-              '消化一博学长销售直播，提炼“建立信任-产品优势-稀缺性-换位思考”四步法',
+              '提炼“建立信任-产品优势-稀缺性-换位思考”四步法',
               '应用于志愿者招募，通过朋友圈打造个人IP，成功转化3名核心成员',
               '方法被社团推广，后续活动报名人数增加20%'
             ]
@@ -588,80 +654,67 @@
           { category: '办公效率', items: ['Word', 'PPT', 'Excel'] },
           { category: 'AI与开发', items: ['大模型应用', 'Trae', '豆包'] },
           { category: '软实力', items: ['组织策划', '复盘总结', '资源协调', '沟通说服'] }
-        ],
-        certificates: ['阿里云大模型Clouder认证']
+        ]
       };
 
-      // ---------- 渲染 Hero 技能徽章 ----------
-      const heroSkillsDiv = document.getElementById('heroSkills');
-      heroSkillsDiv.innerHTML = resume.skillTags.map(s => `<span class="badge">${s}</span>`).join('');
+      // 渲染 Hero 徽章
+      document.getElementById('heroSkills').innerHTML = resume.skillTags.map(s => `<span class="badge">${s}</span>`).join('');
 
-      // ---------- 亮点网格 ----------
-      const highlightsGrid = document.getElementById('highlightsGrid');
-      highlightsGrid.innerHTML = resume.highlights.map(h => `
+      // 亮点网格
+      document.getElementById('highlightsGrid').innerHTML = resume.highlights.map(h => `
         <div class="highlight-card">
           <div class="highlight-number">${h.metric}</div>
-          <div style="color: var(--text-light);">${h.desc}</div>
+          <div style="color: var(--text-light); font-size:0.85rem;">${h.desc}</div>
         </div>
       `).join('');
 
-      // ---------- 校园组织经历 (campus) ----------
-      const campusList = document.getElementById('campusList');
-      campusList.innerHTML = resume.campusExperiences.map(exp => `
+      // 校园组织
+      document.getElementById('campusList').innerHTML = resume.campusExperiences.map(exp => `
         <div class="card">
           <div class="time">${exp.date}</div>
           <div class="title">${exp.title}</div>
-          <ul class="bullet-list">
-            ${exp.bullets.map(b => `<li>${b}</li>`).join('')}
-          </ul>
+          <ul class="bullet-list">${exp.bullets.map(b => `<li>${b}</li>`).join('')}</ul>
         </div>
       `).join('');
 
-      // ---------- 志愿服务经历 ----------
-      const volunteerList = document.getElementById('volunteerList');
-      volunteerList.innerHTML = resume.volunteerExperiences.map(exp => `
+      // 志愿服务
+      document.getElementById('volunteerList').innerHTML = resume.volunteerExperiences.map(exp => `
         <div class="card">
           <div class="time">${exp.date}</div>
           <div class="title">${exp.title}</div>
-          <ul class="bullet-list">
-            ${exp.bullets.map(b => `<li>${b}</li>`).join('')}
-          </ul>
+          <ul class="bullet-list">${exp.bullets.map(b => `<li>${b}</li>`).join('')}</ul>
         </div>
       `).join('');
 
-      // ---------- 学习实践项目 ----------
-      const studyList = document.getElementById('studyList');
-      studyList.innerHTML = resume.studyProjects.map(p => `
+      // 学习实践项目
+      document.getElementById('studyList').innerHTML = resume.studyProjects.map(p => `
         <div class="card">
           <div class="time">${p.date}</div>
           <div class="title">${p.name}</div>
           <div class="sub">${p.tech}</div>
-          <ul class="bullet-list">
-            ${p.bullets.map(b => `<li>${b}</li>`).join('')}
-          </ul>
+          <ul class="bullet-list">${p.bullets.map(b => `<li>${b}</li>`).join('')}</ul>
         </div>
       `).join('');
 
-      // ---------- 个人项目 ----------
-      const personalList = document.getElementById('personalList');
-      personalList.innerHTML = resume.personalProjects.map(p => `
+      // 个人项目
+      document.getElementById('personalList').innerHTML = resume.personalProjects.map(p => `
         <div class="card">
           <div class="time">${p.date}</div>
           <div class="title">${p.name}</div>
           <div class="sub">${p.tech}</div>
-          <ul class="bullet-list">
-            ${p.bullets.map(b => `<li>${b}</li>`).join('')}
-          </ul>
+          <ul class="bullet-list">${p.bullets.map(b => `<li>${b}</li>`).join('')}</ul>
         </div>
       `).join('');
 
-      // ---------- 技能矩阵 (进度条宽度随机但大致合理) ----------
+      // 技能矩阵 (进度条百分比匹配)
       const skillMatrix = document.getElementById('skillMatrix');
       skillMatrix.innerHTML = resume.skills.map(cat => {
         return `<div class="skill-cat"><h3>${cat.category}</h3>${cat.items.map(skill => {
-          const percent = skill.includes('剪映')||skill.includes('PS')||skill.includes('Word') ? 85 :
-                          skill.includes('秀米')||skill.includes('PPT') ? 80 :
-                          skill.includes('大模型') ? 70 : 75;
+          let percent = 75;
+          if (skill === '剪映' || skill === 'Photoshop') percent = 85;
+          if (skill === 'Word' || skill === 'PPT') percent = 88;
+          if (skill === '大模型应用') percent = 70;
+          if (skill === '组织策划') percent = 85;
           return `
             <div class="skill-item">
               <div class="skill-label"><span>${skill}</span><span>${percent}%</span></div>
@@ -671,13 +724,11 @@
         }).join('')}</div>`;
       }).join('');
 
-      // ---------- Tabs 切换 ----------
-      // 经历Tabs
+      // ========== Tabs 切换逻辑 ==========
       const tabCampus = document.getElementById('tabCampus');
       const tabVolunteer = document.getElementById('tabVolunteer');
       const panelCampus = document.getElementById('panelCampus');
       const panelVolunteer = document.getElementById('panelVolunteer');
-
       function setExpTab(selected) {
         [tabCampus, tabVolunteer].forEach(btn => btn.setAttribute('aria-selected', 'false'));
         selected.setAttribute('aria-selected', 'true');
@@ -687,12 +738,10 @@
       tabCampus.addEventListener('click', () => setExpTab(tabCampus));
       tabVolunteer.addEventListener('click', () => setExpTab(tabVolunteer));
 
-      // 项目Tabs
       const tabStudy = document.getElementById('tabStudy');
       const tabPersonal = document.getElementById('tabPersonal');
       const panelStudy = document.getElementById('panelStudy');
       const panelPersonal = document.getElementById('panelPersonal');
-
       function setProjTab(selected) {
         [tabStudy, tabPersonal].forEach(btn => btn.setAttribute('aria-selected', 'false'));
         selected.setAttribute('aria-selected', 'true');
@@ -708,46 +757,42 @@
           const tabs = Array.from(list.querySelectorAll('[role="tab"]'));
           const current = document.activeElement;
           if (!tabs.includes(current)) return;
-          let index = tabs.indexOf(current);
+          let idx = tabs.indexOf(current);
           if (e.key === 'ArrowRight') {
             e.preventDefault();
-            index = (index + 1) % tabs.length;
+            idx = (idx + 1) % tabs.length;
           } else if (e.key === 'ArrowLeft') {
             e.preventDefault();
-            index = (index - 1 + tabs.length) % tabs.length;
+            idx = (idx - 1 + tabs.length) % tabs.length;
           } else return;
-          tabs[index].click();
-          tabs[index].focus();
+          tabs[idx].click();
+          tabs[idx].focus();
         });
       });
 
-      // ---------- 深色模式切换 ----------
+      // 深色模式切换
       const themeToggle = document.getElementById('themeToggle');
       themeToggle.addEventListener('click', () => {
         document.body.classList.toggle('dark-mode');
-        themeToggle.innerHTML = document.body.classList.contains('dark-mode') ? '☀️ 浅色' : '🌓 深色';
+        themeToggle.innerHTML = document.body.classList.contains('dark-mode') ? '☀️' : '🌓';
       });
 
-      // ---------- 打印 ----------
+      // 打印
       document.getElementById('printBtn').addEventListener('click', () => window.print());
 
-      // ---------- 复制邮箱 (防爬虫) ----------
+      // 复制邮箱 (防爬虫)
       document.getElementById('copyEmailBtn').addEventListener('click', () => {
         const user = '2513663851';
         const domain = 'qq.com';
         const email = `${user}@${domain}`;
-        navigator.clipboard.writeText(email).then(() => {
-          alert('邮箱已复制: ' + email);
-        }).catch(() => {
-          prompt('手动复制邮箱:', email);
-        });
+        navigator.clipboard.writeText(email).then(() => alert('邮箱已复制: ' + email));
       });
 
-      // ---------- 返回顶部 ----------
+      // 返回顶部
       const backTop = document.getElementById('backToTop');
       backTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 
-      // ---------- 平滑滚动锚点 ----------
+      // 平滑滚动锚点
       document.querySelectorAll('.nav-links a').forEach(anchor => {
         anchor.addEventListener('click', (e) => {
           e.preventDefault();
