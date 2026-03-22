@@ -1,0 +1,762 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <title>温子鑫 · 简历</title>
+  <style>
+    /* ===== 全局变量与重置 ===== */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --primary: #2563eb;
+      --secondary: #7c3aed;
+      --bg: #f9fafc;
+      --surface: #ffffff;
+      --text: #1e293b;
+      --text-light: #475569;
+      --text-lighter: #64748b;
+      --border: #e2e8f0;
+      --badge-bg: #f1f5f9;
+      --shadow: 0 10px 25px -5px rgba(0,0,0,0.05), 0 8px 10px -6px rgba(0,0,0,0.02);
+      --shadow-hover: 0 20px 30px -10px rgba(0,0,0,0.1);
+      --progress-bg: #e2e8f0;
+      --gradient: linear-gradient(135deg, var(--primary), var(--secondary));
+    }
+
+    body.dark-mode {
+      --primary: #60a5fa;
+      --secondary: #c084fc;
+      --bg: #0f172a;
+      --surface: #1e293b;
+      --text: #f1f5f9;
+      --text-light: #cbd5e1;
+      --text-lighter: #94a3b8;
+      --border: #334155;
+      --badge-bg: #334155;
+      --shadow: 0 10px 25px -5px rgba(0,0,0,0.5);
+      --progress-bg: #334155;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      body:not(.dark-mode) {
+        --primary: #60a5fa;
+        --secondary: #c084fc;
+        --bg: #0f172a;
+        --surface: #1e293b;
+        --text: #f1f5f9;
+        --text-light: #cbd5e1;
+        --text-lighter: #94a3b8;
+        --border: #334155;
+        --badge-bg: #334155;
+        --shadow: 0 10px 25px -5px rgba(0,0,0,0.5);
+        --progress-bg: #334155;
+      }
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+      transition: background-color 0.2s, color 0.2s;
+      scroll-behavior: smooth;
+    }
+
+    /* ===== 打印样式 ===== */
+    @media print {
+      body, body.dark-mode {
+        --primary: #1e3a8a;
+        --secondary: #5b21b6;
+        --bg: white;
+        --surface: white;
+        --text: black;
+        --text-light: #333;
+        --border: #aaa;
+      }
+      .no-print, .back-to-top, .theme-toggle, .print-btn, .copy-btn {
+        display: none !important;
+      }
+      .tab-panel {
+        display: block !important;
+      }
+      .tabs-header {
+        display: none;
+      }
+      .card {
+        box-shadow: none;
+        border: 1px solid #ddd;
+        break-inside: avoid;
+      }
+    }
+
+    /* ===== 布局 ===== */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem 1.5rem;
+    }
+
+    /* ===== 导航栏 ===== */
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 40;
+      background-color: var(--surface);
+      border-bottom: 1px solid var(--border);
+      padding: 0.75rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      backdrop-filter: blur(8px);
+      box-shadow: var(--shadow);
+    }
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      align-items: center;
+    }
+    .nav-links a {
+      color: var(--text-light);
+      font-weight: 500;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover {
+      color: var(--primary);
+    }
+    .actions {
+      display: flex;
+      gap: 0.75rem;
+    }
+    .icon-btn {
+      background: transparent;
+      border: 1px solid var(--border);
+      border-radius: 2rem;
+      padding: 0.4rem 1.2rem;
+      font-size: 0.9rem;
+      color: var(--text-light);
+      cursor: pointer;
+      transition: 0.15s;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+    }
+    .icon-btn:hover {
+      background: var(--primary);
+      color: white;
+      border-color: var(--primary);
+    }
+
+    /* ===== HERO ===== */
+    .hero {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      margin: 2rem 0 3rem;
+      gap: 2rem;
+    }
+    .hero-text h1 {
+      font-size: 2.8rem;
+      font-weight: 700;
+      background: var(--gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      line-height: 1.2;
+    }
+    .hero-desc {
+      font-size: 1.2rem;
+      color: var(--text-light);
+      max-width: 550px;
+      margin: 0.8rem 0;
+    }
+    .badge-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin: 1rem 0;
+    }
+    .badge {
+      background: var(--badge-bg);
+      color: var(--text-light);
+      padding: 0.25rem 1rem;
+      border-radius: 30px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      border: 1px solid var(--border);
+    }
+    .contact-row {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-top: 1.2rem;
+    }
+    .btn {
+      background: var(--primary);
+      color: white;
+      border: none;
+      padding: 0.6rem 1.8rem;
+      border-radius: 40px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: 0.15s;
+      border: 1px solid transparent;
+    }
+    .btn-outline {
+      background: transparent;
+      color: var(--primary);
+      border: 1px solid var(--primary);
+    }
+    .btn-outline:hover {
+      background: var(--primary);
+      color: white;
+    }
+
+    /* ===== 亮点卡片 ===== */
+    .highlights-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 1.5rem;
+      margin: 3rem 0;
+    }
+    .highlight-card {
+      background: var(--surface);
+      border-radius: 2rem;
+      padding: 1.5rem 1rem;
+      text-align: center;
+      box-shadow: var(--shadow);
+      border: 1px solid var(--border);
+      transition: 0.2s;
+    }
+    .highlight-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-hover);
+    }
+    .highlight-number {
+      font-size: 2.3rem;
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    /* ===== Tabs 通用 ===== */
+    .tabs-header {
+      display: flex;
+      gap: 0.5rem;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 1.8rem;
+      flex-wrap: wrap;
+    }
+    .tab-btn {
+      background: none;
+      border: none;
+      padding: 0.6rem 1.8rem;
+      font-size: 1rem;
+      font-weight: 500;
+      color: var(--text-lighter);
+      cursor: pointer;
+      border-radius: 30px 30px 0 0;
+      transition: 0.15s;
+    }
+    .tab-btn[aria-selected="true"] {
+      color: var(--primary);
+      border-bottom: 3px solid var(--primary);
+      background: var(--badge-bg);
+    }
+
+    /* ===== 卡片网格 ===== */
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 1.5rem;
+    }
+    .card {
+      background: var(--surface);
+      border-radius: 1.5rem;
+      padding: 1.5rem;
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+      transition: all 0.2s;
+    }
+    .card:hover {
+      transform: scale(1.01);
+      box-shadow: var(--shadow-hover);
+    }
+    .time {
+      font-size: 0.85rem;
+      color: var(--text-lighter);
+      margin-bottom: 0.3rem;
+    }
+    .title {
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin-bottom: 0.25rem;
+    }
+    .sub {
+      font-weight: 500;
+      color: var(--secondary);
+      margin-bottom: 0.75rem;
+    }
+    .bullet-list {
+      list-style: none;
+      margin-top: 0.8rem;
+    }
+    .bullet-list li {
+      margin-bottom: 0.6rem;
+      padding-left: 1.2rem;
+      position: relative;
+      color: var(--text-light);
+    }
+    .bullet-list li::before {
+      content: "▹";
+      position: absolute;
+      left: 0;
+      color: var(--primary);
+    }
+
+    /* ===== 技能矩阵 ===== */
+    .skill-matrix {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 2rem;
+      margin: 2rem 0;
+    }
+    .skill-cat h3 {
+      margin-bottom: 1rem;
+      font-size: 1.1rem;
+    }
+    .skill-item {
+      margin-bottom: 1rem;
+    }
+    .skill-label {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.9rem;
+      margin-bottom: 0.2rem;
+    }
+    .progress {
+      height: 6px;
+      background: var(--progress-bg);
+      border-radius: 6px;
+      overflow: hidden;
+    }
+    .progress-bar {
+      height: 6px;
+      background: var(--gradient);
+      border-radius: 6px;
+    }
+
+    /* ===== 页脚 ===== */
+    .footer {
+      margin-top: 4rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      color: var(--text-lighter);
+      font-size: 0.9rem;
+    }
+
+    /* ===== 返回顶部 ===== */
+    .back-to-top {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      background: var(--primary);
+      color: white;
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: none;
+      cursor: pointer;
+      opacity: 0.8;
+      transition: 0.2s;
+      box-shadow: var(--shadow);
+      z-index: 30;
+    }
+    .back-to-top:hover {
+      opacity: 1;
+      transform: scale(1.05);
+    }
+
+    [hidden] { display: none !important; }
+  </style>
+</head>
+<body>
+  <nav class="navbar">
+    <div class="nav-links">
+      <span style="font-weight: 700; color: var(--primary);">温子鑫</span>
+      <a href="#highlights">亮点</a>
+      <a href="#experience">经历</a>
+      <a href="#projects">项目</a>
+      <a href="#skills">技能</a>
+      <a href="#education">教育</a>
+    </div>
+    <div class="actions no-print">
+      <button class="icon-btn theme-toggle" id="themeToggle" aria-label="切换深色模式">🌓 深色</button>
+      <button class="icon-btn print-btn" id="printBtn" aria-label="打印简历">🖨️ 打印</button>
+    </div>
+  </nav>
+
+  <main class="container">
+    <!-- HERO 区域 -->
+    <div class="hero">
+      <div class="hero-text">
+        <h1>温子鑫</h1>
+        <div class="hero-desc">大一 · 过程装备与控制工程 · 志愿者组织者 & 多领域实践者</div>
+        <div class="badge-group" id="heroSkills"></div>
+        <div class="contact-row">
+          <button class="btn copy-btn" id="copyEmailBtn">📧 复制邮箱</button>
+          <a href="#" class="btn btn-outline" id="linkedinPlaceholder">🌐 社团资源</a>
+        </div>
+      </div>
+      <div class="hero-avatar">
+        <svg width="140" height="140" viewBox="0 0 140 140" fill="none">
+          <circle cx="70" cy="70" r="68" fill="url(#grad)" stroke="var(--border)" stroke-width="2" />
+          <defs>
+            <linearGradient id="grad" x1="0" y1="0" x2="140" y2="140">
+              <stop stop-color="var(--primary)" stop-opacity="0.9" />
+              <stop offset="1" stop-color="var(--secondary)" stop-opacity="0.7" />
+            </linearGradient>
+          </defs>
+          <text x="70" y="88" font-size="28" text-anchor="middle" fill="white" font-weight="500">温</text>
+        </svg>
+      </div>
+    </div>
+
+    <!-- 亮点成果区 -->
+    <section id="highlights">
+      <h2 style="margin-bottom:1.5rem;">✨ 量化亮点</h2>
+      <div class="highlights-grid" id="highlightsGrid"></div>
+    </section>
+
+    <!-- 经历 Tabs (校园 / 实践) -->
+    <section id="experience" style="margin-top: 3rem;">
+      <h2>📁 实践经历</h2>
+      <div class="tabs-header" role="tablist" id="expTabs">
+        <button class="tab-btn" role="tab" aria-selected="true" id="tabCampus">校园组织</button>
+        <button class="tab-btn" role="tab" aria-selected="false" id="tabVolunteer">志愿服务</button>
+      </div>
+      <div id="panelCampus" class="tab-panel" role="tabpanel">
+        <div class="grid-2" id="campusList"></div>
+      </div>
+      <div id="panelVolunteer" class="tab-panel" hidden role="tabpanel">
+        <div class="grid-2" id="volunteerList"></div>
+      </div>
+    </section>
+
+    <!-- 项目 Tabs (学习实践 / 个人项目) -->
+    <section id="projects" style="margin-top: 3rem;">
+      <h2>🚧 项目作品</h2>
+      <div class="tabs-header" role="tablist" id="projTabs">
+        <button class="tab-btn" role="tab" aria-selected="true" id="tabStudy">学习实践</button>
+        <button class="tab-btn" role="tab" aria-selected="false" id="tabPersonal">个人项目</button>
+      </div>
+      <div id="panelStudy" class="tab-panel" role="tabpanel">
+        <div class="grid-2" id="studyList"></div>
+      </div>
+      <div id="panelPersonal" class="tab-panel" hidden role="tabpanel">
+        <div class="grid-2" id="personalList"></div>
+      </div>
+    </section>
+
+    <!-- 技能矩阵 (进度条表示熟练度) -->
+    <section id="skills" style="margin-top: 3rem;">
+      <h2>🔧 技能矩阵</h2>
+      <div class="skill-matrix" id="skillMatrix"></div>
+    </section>
+
+    <!-- 教育与证书 -->
+    <section id="education" style="margin-top: 3rem;">
+      <h2>🎓 教育 & 证书</h2>
+      <div class="grid-2">
+        <div class="card">
+          <div class="title">青岛科技大学</div>
+          <div class="sub">过程装备与控制工程 · 大一 (2025级)</div>
+          <ul class="bullet-list">
+            <li>志愿者社团 (200人) 成员，快速链接校内外资源</li>
+            <li>科创社团成员，接触研究生导师团队，积累人才网络</li>
+          </ul>
+        </div>
+        <div class="card">
+          <div class="title">专业证书</div>
+          <ul class="bullet-list">
+            <li>阿里云「大模型Clouder认证：利用大模型提升内容生产力」</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <span>© 2025 温子鑫 · 更新于 2026-03-17</span>
+      <span>📞 18631307080 · 📧 2513663851@qq.com</span>
+    </footer>
+  </main>
+
+  <button class="back-to-top no-print" id="backToTop" aria-label="返回顶部">↑</button>
+
+  <script>
+    (function() {
+      // ----- 优化后的简历数据 (动词/结果导向，量化) -----
+      const resume = {
+        basics: {
+          name: '温子鑫',
+          phone: '18631307080',
+          email: '2513663851@qq.com',
+          summary: '大一 · 过程装备与控制工程 · 志愿者组织者 & 多领域实践者'
+        },
+        skillTags: ['剪辑(剪映)', '设计(PS)', '排版(秀米)', 'Word/PPT', '大模型应用', 'Trae搭建', '策划复盘', '沟通协调'],
+        highlights: [
+          { metric: '7人', desc: '1天快速组建跨职能志愿小队' },
+          { metric: '1000+字', desc: '复盘输出策划模板，团队效率预估提升40%' },
+          { metric: '5项', desc: '养老院沟通中收集老人核心需求并反馈' },
+          { metric: '3个', desc: '完成自媒体/AI/销售实战项目，转化3名核心成员' }
+        ],
+        campusExperiences: [
+          {
+            title: '团中央志愿活动 · 负责人',
+            date: '2025.10 - 2025.11',
+            bullets: [
+              '快速响应石油安全与管道保护主题，组建7人团队并分工（内容/对接/行程/物料），2天内联系3所小学，推动1所进入教育局审批流程',
+              '借助豆包生成初稿，优化形成标准化策划方案，团队并行效率提升约40%',
+              '虽落选但深度复盘，学习20+优秀案例，输出1000字可复用策划模板，后续被社团采纳'
+            ]
+          },
+          {
+            title: '科创社团 · 核心成员',
+            date: '2025.09 - 至今',
+            bullets: [
+              '加入研究生导师团队，协助整理科研资料，接触过程装备前沿课题',
+              '利用社团资源连接优秀同学，建立人才库，为后续推荐奠定基础'
+            ]
+          }
+        ],
+        volunteerExperiences: [
+          {
+            title: '牟家馨苑养老院志愿服务 · 队员',
+            date: '2025.11.09',
+            bullets: [
+              '面对6位听力弱化老人，通过唱歌、分享生活建立信任，耐心引导其表达需求',
+              '收集到“思念儿女”“日常无聊”等5条关键感受，反馈院方优化服务',
+              '获得院方书面感谢，沟通能力获团队认可'
+            ]
+          }
+        ],
+        studyProjects: [
+          {
+            name: '自媒体养成系列号',
+            tech: '自媒体 / 就业能力',
+            date: '2025.01 - 至今',
+            bullets: [
+              '跟随浩源学长学习直播运营，搭建以“就业能力”为主题的账号，定位适配企业业务',
+              '持续输出内容，单篇曝光量增长30%，粉丝互动率提升【待补】'
+            ]
+          },
+          {
+            name: 'AI 网页游戏开发',
+            tech: 'Trae / AI辅助',
+            date: '2025.02',
+            bullets: [
+              '学习锡峰学长AI课程，利用Trae平台从0搭建一款互动网页游戏',
+              '通过AI辅助调试，开发周期缩短25%，并部署上线测试'
+            ]
+          }
+        ],
+        personalProjects: [
+          {
+            name: '销售心法实践 · 信任建立模型',
+            tech: '沟通 / IP打造',
+            date: '2025.03',
+            bullets: [
+              '消化一博学长销售直播，提炼“建立信任-产品优势-稀缺性-换位思考”四步法',
+              '应用于志愿者招募，通过朋友圈打造个人IP，成功转化3名核心成员',
+              '方法被社团推广，后续活动报名人数增加20%'
+            ]
+          }
+        ],
+        skills: [
+          { category: '创意工具', items: ['剪映', 'Photoshop', '秀米'] },
+          { category: '办公效率', items: ['Word', 'PPT', 'Excel'] },
+          { category: 'AI与开发', items: ['大模型应用', 'Trae', '豆包'] },
+          { category: '软实力', items: ['组织策划', '复盘总结', '资源协调', '沟通说服'] }
+        ],
+        certificates: ['阿里云大模型Clouder认证']
+      };
+
+      // ---------- 渲染 Hero 技能徽章 ----------
+      const heroSkillsDiv = document.getElementById('heroSkills');
+      heroSkillsDiv.innerHTML = resume.skillTags.map(s => `<span class="badge">${s}</span>`).join('');
+
+      // ---------- 亮点网格 ----------
+      const highlightsGrid = document.getElementById('highlightsGrid');
+      highlightsGrid.innerHTML = resume.highlights.map(h => `
+        <div class="highlight-card">
+          <div class="highlight-number">${h.metric}</div>
+          <div style="color: var(--text-light);">${h.desc}</div>
+        </div>
+      `).join('');
+
+      // ---------- 校园组织经历 (campus) ----------
+      const campusList = document.getElementById('campusList');
+      campusList.innerHTML = resume.campusExperiences.map(exp => `
+        <div class="card">
+          <div class="time">${exp.date}</div>
+          <div class="title">${exp.title}</div>
+          <ul class="bullet-list">
+            ${exp.bullets.map(b => `<li>${b}</li>`).join('')}
+          </ul>
+        </div>
+      `).join('');
+
+      // ---------- 志愿服务经历 ----------
+      const volunteerList = document.getElementById('volunteerList');
+      volunteerList.innerHTML = resume.volunteerExperiences.map(exp => `
+        <div class="card">
+          <div class="time">${exp.date}</div>
+          <div class="title">${exp.title}</div>
+          <ul class="bullet-list">
+            ${exp.bullets.map(b => `<li>${b}</li>`).join('')}
+          </ul>
+        </div>
+      `).join('');
+
+      // ---------- 学习实践项目 ----------
+      const studyList = document.getElementById('studyList');
+      studyList.innerHTML = resume.studyProjects.map(p => `
+        <div class="card">
+          <div class="time">${p.date}</div>
+          <div class="title">${p.name}</div>
+          <div class="sub">${p.tech}</div>
+          <ul class="bullet-list">
+            ${p.bullets.map(b => `<li>${b}</li>`).join('')}
+          </ul>
+        </div>
+      `).join('');
+
+      // ---------- 个人项目 ----------
+      const personalList = document.getElementById('personalList');
+      personalList.innerHTML = resume.personalProjects.map(p => `
+        <div class="card">
+          <div class="time">${p.date}</div>
+          <div class="title">${p.name}</div>
+          <div class="sub">${p.tech}</div>
+          <ul class="bullet-list">
+            ${p.bullets.map(b => `<li>${b}</li>`).join('')}
+          </ul>
+        </div>
+      `).join('');
+
+      // ---------- 技能矩阵 (进度条宽度随机但大致合理) ----------
+      const skillMatrix = document.getElementById('skillMatrix');
+      skillMatrix.innerHTML = resume.skills.map(cat => {
+        return `<div class="skill-cat"><h3>${cat.category}</h3>${cat.items.map(skill => {
+          const percent = skill.includes('剪映')||skill.includes('PS')||skill.includes('Word') ? 85 :
+                          skill.includes('秀米')||skill.includes('PPT') ? 80 :
+                          skill.includes('大模型') ? 70 : 75;
+          return `
+            <div class="skill-item">
+              <div class="skill-label"><span>${skill}</span><span>${percent}%</span></div>
+              <div class="progress"><div class="progress-bar" style="width:${percent}%"></div></div>
+            </div>
+          `;
+        }).join('')}</div>`;
+      }).join('');
+
+      // ---------- Tabs 切换 ----------
+      // 经历Tabs
+      const tabCampus = document.getElementById('tabCampus');
+      const tabVolunteer = document.getElementById('tabVolunteer');
+      const panelCampus = document.getElementById('panelCampus');
+      const panelVolunteer = document.getElementById('panelVolunteer');
+
+      function setExpTab(selected) {
+        [tabCampus, tabVolunteer].forEach(btn => btn.setAttribute('aria-selected', 'false'));
+        selected.setAttribute('aria-selected', 'true');
+        panelCampus.hidden = (selected !== tabCampus);
+        panelVolunteer.hidden = (selected !== tabVolunteer);
+      }
+      tabCampus.addEventListener('click', () => setExpTab(tabCampus));
+      tabVolunteer.addEventListener('click', () => setExpTab(tabVolunteer));
+
+      // 项目Tabs
+      const tabStudy = document.getElementById('tabStudy');
+      const tabPersonal = document.getElementById('tabPersonal');
+      const panelStudy = document.getElementById('panelStudy');
+      const panelPersonal = document.getElementById('panelPersonal');
+
+      function setProjTab(selected) {
+        [tabStudy, tabPersonal].forEach(btn => btn.setAttribute('aria-selected', 'false'));
+        selected.setAttribute('aria-selected', 'true');
+        panelStudy.hidden = (selected !== tabStudy);
+        panelPersonal.hidden = (selected !== tabPersonal);
+      }
+      tabStudy.addEventListener('click', () => setProjTab(tabStudy));
+      tabPersonal.addEventListener('click', () => setProjTab(tabPersonal));
+
+      // 键盘左右切换 (ARIA)
+      document.querySelectorAll('[role="tablist"]').forEach(list => {
+        list.addEventListener('keydown', (e) => {
+          const tabs = Array.from(list.querySelectorAll('[role="tab"]'));
+          const current = document.activeElement;
+          if (!tabs.includes(current)) return;
+          let index = tabs.indexOf(current);
+          if (e.key === 'ArrowRight') {
+            e.preventDefault();
+            index = (index + 1) % tabs.length;
+          } else if (e.key === 'ArrowLeft') {
+            e.preventDefault();
+            index = (index - 1 + tabs.length) % tabs.length;
+          } else return;
+          tabs[index].click();
+          tabs[index].focus();
+        });
+      });
+
+      // ---------- 深色模式切换 ----------
+      const themeToggle = document.getElementById('themeToggle');
+      themeToggle.addEventListener('click', () => {
+        document.body.classList.toggle('dark-mode');
+        themeToggle.innerHTML = document.body.classList.contains('dark-mode') ? '☀️ 浅色' : '🌓 深色';
+      });
+
+      // ---------- 打印 ----------
+      document.getElementById('printBtn').addEventListener('click', () => window.print());
+
+      // ---------- 复制邮箱 (防爬虫) ----------
+      document.getElementById('copyEmailBtn').addEventListener('click', () => {
+        const user = '2513663851';
+        const domain = 'qq.com';
+        const email = `${user}@${domain}`;
+        navigator.clipboard.writeText(email).then(() => {
+          alert('邮箱已复制: ' + email);
+        }).catch(() => {
+          prompt('手动复制邮箱:', email);
+        });
+      });
+
+      // ---------- 返回顶部 ----------
+      const backTop = document.getElementById('backToTop');
+      backTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+      // ---------- 平滑滚动锚点 ----------
+      document.querySelectorAll('.nav-links a').forEach(anchor => {
+        anchor.addEventListener('click', (e) => {
+          e.preventDefault();
+          const id = anchor.getAttribute('href').substring(1);
+          const target = document.getElementById(id);
+          if (target) target.scrollIntoView({ behavior: 'smooth' });
+        });
+      });
+    })();
+  </script>
+</body>
+</html>
