@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>温子鑫 | PORTFOLIO</title>
+    <style>
+        /* ================= 极简清新设计系统 (色彩与排版升级版) ================= */
+        :root {
+            --bg-color: #f8fafc;
+            --text-dark: #0f172a;
+            --text-light: #475569;
+            --text-ultra-light: #cbd5e1;
+            
+            /* 字体升级：正文保持无衬线，标题采用优雅的宋体/明朝体，数字采用重型黑体 */
+            --font-sans: -apple-system, BlinkMacSystemFont, "Helvetica Neue", "PingFang SC", sans-serif;
+            --font-serif: "Noto Serif SC", "Songti SC", "STZhongsong", "KaiTi", "Georgia", serif;
+            --font-display: "Arial Black", "Impact", sans-serif;
+            
+            /* 新增自然风景色彩变量：天青色与薄荷绿 */
+            --accent-blue: #0ea5e9;
+            --accent-green: #10b981;
+            --gradient-text: linear-gradient(135deg, var(--accent-blue) 0%, var(--accent-green) 100%);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: var(--font-sans);
+            background-color: var(--bg-color);
+            color: var(--text-dark);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+        }
+
+        /* 呼吸感排版类 */
+        .en-subtitle {
+            font-size: 0.75rem;
+            letter-spacing: 0.4em;
+            text-transform: uppercase;
+            /* 使用彩色渐变提升活力 */
+            background: var(--gradient-text);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 1.2rem;
+            font-weight: 700;
+        }
+
+        .main-title {
+            font-family: var(--font-serif);
+            font-size: clamp(3.5rem, 8vw, 6.5rem);
+            font-weight: 600; /* 加重衬线体，显得更有力 */
+            letter-spacing: 0.02em;
+            line-height: 1.1;
+            margin-bottom: 2rem;
+            color: var(--text-dark);
+        }
+
+        .paragraph {
+            font-size: 1.05rem;
+            color: var(--text-light);
+            line-height: 2;
+            max-width: 600px;
+            font-weight: 300;
+        }
+
+        /* ================= 首屏区域 ================= */
+        .hero {
+            position: relative;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 0 10vw;
+            overflow: hidden;
+        }
+
+        .hero-bg {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-color: #e0f2fe;
+            z-index: -2;
+            background-size: cover;
+            background-position: center right;
+            background-repeat: no-repeat;
+        }
+
+        /* 遮罩层加入微透的天青色，呼应风景主题 */
+        .hero-overlay {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(to right, rgba(248, 250, 252, 0.95) 0%, rgba(224, 242, 254, 0.6) 40%, transparent 100%);
+            backdrop-filter: blur(4px);
+            z-index: -1;
+        }
+
+        .hero-content {
+            animation: fadeIn 1.5s ease-out;
+            max-width: 800px;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ================= 竖向词条区域 ================= */
+        .vertical-section {
+            position: relative;
+            /* 增加环境光晕背景，打破单调的纯白色 */
+            background: 
+                radial-gradient(circle at 0% 0%, rgba(14, 165, 233, 0.04) 0%, transparent 40%),
+                radial-gradient(circle at 100% 100%, rgba(16, 185, 129, 0.04) 0%, transparent 40%),
+                #ffffff;
+            padding: 10vh 0;
+            overflow: hidden;
+        }
+
+        /* 背景大英文提示语：使用描边镂空效果，并透出淡淡蓝色 */
+        .bg-watermark {
+            position: absolute;
+            top: 5vh;
+            left: 5vw;
+            font-family: var(--font-display);
+            font-size: 10vw;
+            color: transparent;
+            -webkit-text-stroke: 2px rgba(14, 165, 233, 0.06);
+            white-space: nowrap;
+            z-index: 0;
+            pointer-events: none;
+            writing-mode: vertical-rl;
+            transform: rotate(180deg);
+        }
+
+        .role-list {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .role-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 8vh 10vw;
+            border-bottom: 1px solid rgba(14, 165, 233, 0.05); /* 分割线带一点微蓝色 */
+            cursor: pointer;
+            transition: all 0.5s ease;
+        }
+
+        .role-item:first-child {
+            border-top: 1px solid rgba(14, 165, 233, 0.05);
+        }
+
+        /* 悬浮时增加轻微的渐变背景与位移 */
+        .role-item:hover {
+            background: linear-gradient(to right, rgba(14, 165, 233, 0.03) 0%, transparent 100%);
+            padding-left: 11vw; /* 悬浮时整体微微右移，增加互动灵动感 */
+        }
+
+        .role-text-content {
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+            max-width: 600px;
+            padding-right: 4vw;
+            transition: transform 0.5s ease;
+        }
+
+        /* 数字采用超重字体+自然渐变色 */
+        .role-number {
+            font-family: var(--font-display);
+            font-size: 4.5rem; /* 字号放大 */
+            background: var(--gradient-text);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-style: italic;
+            margin-bottom: -15px;
+            opacity: 0.9;
+            transform: translateX(-5px); /* 视觉对齐微调 */
+        }
+
+        /* 标题采用优雅衬线体，与粗犷的数字形成强烈的高级对比 */
+        .role-title {
+            font-family: var(--font-serif);
+            font-size: 2.8rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--text-dark);
+        }
+
+        .role-desc {
+            font-size: 1rem;
+            color: var(--text-light);
+            font-weight: 300;
+            line-height: 1.8;
+        }
+
+        /* 悬浮划出图片的特效 */
+        .role-img-reveal {
+            width: 0;
+            height: 400px;
+            border-radius: 24px; /* 更圆润的倒角带来高级质感 */
+            opacity: 0;
+            transition: all 0.8s cubic-bezier(0.19, 1, 0.22, 1);
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            flex-shrink: 0;
+            /* 增加微弱的内发光边框提升质感 */
+            box-shadow: inset 0 0 0 1px rgba(255,255,255,0.2);
+        }
+
+        @media (min-width: 769px) {
+            .role-item:hover .role-img-reveal,
+            .role-item.active .role-img-reveal {
+                width: 35vw;
+                min-width: 300px;
+                max-width: 500px;
+                opacity: 1;
+                /* 图片阴影增加微蓝的色彩倾向，告别死灰 */
+                box-shadow: 0 20px 40px rgba(14, 165, 233, 0.1), inset 0 0 0 1px rgba(255,255,255,0.3);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .role-item {
+                flex-direction: column;
+                align-items: flex-start;
+                padding: 6vh 8vw;
+            }
+            .role-item:hover {
+                padding-left: 8vw; /* 移动端取消悬浮右移，防止溢出屏幕 */
+            }
+            .role-text-content {
+                padding-right: 0;
+                max-width: 100%;
+            }
+            .role-img-reveal {
+                width: 100%;
+                height: 0;
+                margin-top: 0;
+                opacity: 0;
+            }
+            .role-item:hover .role-img-reveal,
+            .role-item.active .role-img-reveal {
+                height: 350px;
+                margin-top: 2rem;
+                opacity: 1;
+                box-shadow: 0 10px 30px rgba(14, 165, 233, 0.1);
+            }
+        }
+
+        /* ================= 尾部区域 ================= */
+        .footer-section {
+            padding: 15vh 10vw;
+            /* 尾部也加上微色彩的天空渐变背景 */
+            background: linear-gradient(to bottom, #ffffff 0%, #f0f9ff 100%);
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10vw;
+            justify-content: space-between;
+        }
+
+        .info-block {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .info-title {
+            font-family: var(--font-serif);
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin-bottom: 2rem;
+            border-bottom: 1px solid rgba(14, 165, 233, 0.15); /* 彩色分割线 */
+            padding-bottom: 1rem;
+        }
+
+        .info-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1.5rem;
+        }
+
+        .info-label {
+            color: var(--text-dark);
+            font-weight: 500;
+        }
+
+        .info-value {
+            color: var(--text-light);
+            font-weight: 300;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 第一屏：首屏大图 -->
+    <header class="hero">
+        <div class="hero-bg" style="background-image: url('1.png');"></div>
+        <div class="hero-overlay"></div>
+        
+        <div class="hero-content">
+            <div class="en-subtitle">Hello, I am</div>
+            <h1 class="main-title">温子鑫</h1>
+            <p class="paragraph">
+                生命不息，踏浪而行。<br>
+                在青岛科技大学的校园里，我不断探索科技与商业的边界，用文字与影像记录真实，以热情拥抱每一个未知的可能。
+            </p>
+        </div>
+    </header>
+
+    <!-- 第二屏：竖向词条列表 -->
+    <section class="vertical-section" id="roles-section">
+        <div class="bg-watermark">EXPLORE ROLES</div>
+
+        <div class="role-list">
+            
+            <!-- 词条 1 -->
+            <div class="role-item">
+                <div class="role-text-content">
+                    <div class="en-subtitle">ROLE 01 / AI EXPLORER</div>
+                    <div class="role-number">01</div>
+                    <h2 class="role-title">AI探索者</h2>
+                    <p class="role-desc">保持对前沿技术的敏锐嗅觉，热衷于探索人工智能的应用边界，让算法与技术真正赋能日常效率与创新。</p>
+                </div>
+                <!-- 抽出画卷特效 -->
+                <div class="role-img-reveal" style="background-image: url('2.png');"></div>
+            </div>
+
+            <!-- 词条 2 -->
+            <div class="role-item">
+                <div class="role-text-content">
+                    <div class="en-subtitle">ROLE 02 / AMBASSADOR</div>
+                    <div class="role-number">02</div>
+                    <h2 class="role-title">校园大使</h2>
+                    <p class="role-desc">作为品牌与校园的桥梁，拥有出色的沟通力与同理心，致力于将有价值的理念精准传递，构建良好的互动生态。</p>
+                </div>
+                <div class="role-img-reveal" style="background-image: url('3.png');"></div>
+            </div>
+
+            <!-- 词条 3 -->
+            <div class="role-item">
+                <div class="role-text-content">
+                    <div class="en-subtitle">ROLE 03 / CREATOR</div>
+                    <div class="role-number">03</div>
+                    <h2 class="role-title">自媒体创作者</h2>
+                    <p class="role-desc">用镜头捕捉灵感，用文字沉淀思考。擅长内容策划与视觉呈现，在信息的洪流中打造具有个人风格的声音。</p>
+                </div>
+                <div class="role-img-reveal" style="background-image: url('4.png');"></div>
+            </div>
+
+            <!-- 词条 4 -->
+            <div class="role-item">
+                <div class="role-text-content">
+                    <div class="en-subtitle">ROLE 04 / ENTREPRENEUR</div>
+                    <div class="role-number">04</div>
+                    <h2 class="role-title">校园生意创业者</h2>
+                    <p class="role-desc">从零到一的实践派。洞察校园隐性需求，通过强悍的执行力将商业构想落地，打造可持续的闭环生意模型。</p>
+                </div>
+                <div class="role-img-reveal" style="background-image: url('5.png');"></div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- 第三屏：静态教育与联系信息 -->
+    <section class="footer-section">
+        <div class="info-block">
+            <div class="en-subtitle">BACKGROUND</div>
+            <h3 class="info-title">教育经历</h3>
+            <div class="info-row">
+                <span class="info-label">青岛科技大学</span>
+                <span class="info-value">本科大一</span>
+            </div>
+            <div class="info-row">
+                <span class="info-label">专业</span>
+                <span class="info-value">过程装备与控制</span>
+            </div>
+        </div>
+
+        <div class="info-block">
+            <div class="en-subtitle">GET IN TOUCH</div>
+            <h3 class="info-title">联系方式</h3>
+            <div class="info-row">
+                <span class="info-label">Phone</span>
+                <span class="info-value">186 3130 7080</span>
+            </div>
+            <div class="info-row">
+                <span class="info-label">WeChat</span>
+                <span class="info-value">wzx20060518wzx</span>
+            </div>
+            <div class="info-row">
+                <span class="info-label">Email</span>
+                <span class="info-value">2513663851@qq.com</span>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // 针对移动端的交互优化：点击词条时触发划出效果
+        // 桌面端主要依靠 CSS 的 :hover 实现，非常稳定
+        const roleItems = document.querySelectorAll('.role-item');
+        
+        roleItems.forEach(item => {
+            item.addEventListener('touchstart', () => {
+                // 如果当前已经是 active，就不做处理；否则先清除其他的，再激活当前
+                if (!item.classList.contains('active')) {
+                    roleItems.forEach(el => el.classList.remove('active'));
+                    item.classList.add('active');
+                }
+            }, { passive: true }); // passive: true 提高滑动流畅度
+        });
+    </script>
+</body>
+</html>
